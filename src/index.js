@@ -2,7 +2,7 @@
  * Load environment variables from a .env file into process.env.
  */
 require("dotenv").config();
-const { Client, IntentsBitField } = require("discord.js");
+const { Client, IntentsBitField, ActivityType } = require("discord.js");
 
 /**
  * Bot instance for interacting with Discord.
@@ -40,6 +40,12 @@ function normalizeContent(str) {
  */
 client.on("ready", (c) => {
   console.log(`✅ ${c.user.tag} is online`);
+
+  client.user.setActivity({
+    name: "Tola",
+    type: ActivityType.Streaming,
+    url: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+  })
 });
 
 /**

@@ -1,0 +1,3 @@
+iniciar => nodemon
+mensagem de cargo => node src/sand-message.js
+atualizar slash commands => node src/register-conmmands.js
