@@ -43,7 +43,7 @@ const roles = [
  * Sends a message with buttons to assign roles.
  * @param {Client} c - The client instance.
  */
-client.on("ready", async (c) => {
+client.on('ready', async (c) => {
   try {
     const channel = await client.channels.cache.get('1264030735833108560');
     if (!channel) return;
@@ -51,7 +51,7 @@ client.on("ready", async (c) => {
     const row = new ActionRowBuilder();
 
     roles.forEach((role) => {
-      row.addComponents(
+      row.components.push(
         new ButtonBuilder()
           .setCustomId(role.id)
           .setLabel(role.label)
@@ -61,7 +61,7 @@ client.on("ready", async (c) => {
 
     await channel.send({
       content: 'Escolha o seu cargo abaixo.',
-      components: [row]
+      components: [row],
     });
     process.exit();
   } catch (error) {
