@@ -1,10 +1,16 @@
+/**
+ * Load environment variables from a .env file into process.env.
+ */
 require("dotenv").config();
 const { Client, IntentsBitField, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require("discord.js");
 
-// bot instant
+/**
+ * Bot instance for interacting with Discord.
+ * @type {Client}
+ */
 const client = new Client({
   intents: [
-    // bot perms
+    // Bot permissions
     IntentsBitField.Flags.Guilds,
     IntentsBitField.Flags.GuildMembers,
     IntentsBitField.Flags.GuildMessages,
@@ -12,28 +18,32 @@ const client = new Client({
   ],
 });
 
-// auto role by a button
+/**
+ * Array of role objects that can be assigned via a button.
+ * Each object contains the role ID and label.
+ * @type {Array<{id: string, label: string}>}
+ */
 const roles = [
   {
-    // r6
     id: '1263309461066612828',
     label: 'R6'
   },
   {
-    // puc
     id: '1263309406297395253',
     label: 'puc'
   },
   {
-    // da
     id: '1263309318137315339',
     label: 'DA'
   },
 ];
 
-// enevt list onlie
+/**
+ * Event listener that triggers when the bot is ready.
+ * Sends a message with buttons to assign roles.
+ * @param {Client} c - The client instance.
+ */
 client.on("ready", async (c) => {
-  // create a message to give roles
   try {
     const channel = await client.channels.cache.get('1264030735833108560');
     if (!channel) return;
@@ -43,7 +53,7 @@ client.on("ready", async (c) => {
     roles.forEach((role) => {
       row.addComponents(
         new ButtonBuilder()
-          .setCustomId(role.id) // Each button must have a unique custom ID
+          .setCustomId(role.id)
           .setLabel(role.label)
           .setStyle(ButtonStyle.Primary)
       );
@@ -59,4 +69,7 @@ client.on("ready", async (c) => {
   }
 });
 
+/**
+ * Log in to Discord with the provided bot token.
+ */
 client.login(process.env.TOKEN);

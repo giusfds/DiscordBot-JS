@@ -1,23 +1,29 @@
+/**
+ * Load environment variables from a .env file into process.env.
+ */
 require("dotenv").config();
 const { REST, Routes, ApplicationCommandOptionType } = require("discord.js");
 
-// All the functions to be registered on the server
-// is gonna to appear on / menu, need to chenge on index function
+/**
+ * Array of command objects to be registered on the server.
+ * These commands will appear in the / menu.
+ * @type {Array<Object>}
+ */
 const commands = [
   {
     name: "add",
-    description: "soma de numeros",
+    description: "Soma de números",
     options: [
       {
         name: "first-number",
-        description: "the first number",
+        description: "O primeiro número",
         type: ApplicationCommandOptionType.Number,
         require: false,
         autocomplete: true
-      },  
+      },
       {
         name: "second-number",
-        description: "the second number",
+        description: "O segundo número",
         type: ApplicationCommandOptionType.Number,
         require: false,
         autocomplete: true
@@ -26,9 +32,16 @@ const commands = [
   },
 ];
 
+/**
+ * REST API instance for making requests to Discord's API.
+ * @type {REST}
+ */
 const rest = new REST({ version: "10" }).setToken(process.env.TOKEN);
 
-// Function to register the commands as slash commands
+/**
+ * Registers slash commands to the Discord server.
+ * This is an immediately invoked function expression (IIFE) to asynchronously register commands.
+ */
 (async () => {
   try {
     console.log("Registering slash commands");
